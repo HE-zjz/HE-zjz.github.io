@@ -333,8 +333,8 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  
-                </span>
+                      0 ��
+              </span>
               
 
               
@@ -349,8 +349,8 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  
-                </span>
+                1 ����
+             </span>
               
             </div>
           
@@ -489,8 +489,8 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  
-                </span>
+                      220 ��
+              </span>
               
 
               
@@ -505,8 +505,8 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  
-                </span>
+                1 ����
+             </span>
               
             </div>
           
@@ -530,192 +530,6 @@
           
             <p>io读入输出优化库:</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> io &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> MAXBUF = <span class="number">1</span> &lt;&lt; <span class="number">20</span>;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">char</span> buf[MAXBUF],*p1,*p2;</span><br><span class="line">        <span class="keyword">if</span>(p1==p2) &#123;</span><br><span class="line">            p2 = (p1=buf)+fread(buf,<span class="number">1</span>,MAXBUF,<span class="built_in">stdin</span>);</span><br><span class="line">            <span class="keyword">if</span> (p1 == p2) <span class="keyword">return</span> EOF;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> *p1++;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//	#define get() getchar()</span></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> &amp;x)</span> </span>&#123;</span><br><span class="line">       x = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">bool</span> is_neg = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">char</span> ch =get();</span><br><span class="line">        <span class="keyword">while</span>(!(ch &gt;=<span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>) &amp;&amp; ch != <span class="string">'-'</span>) ch = get();</span><br><span class="line">       <span class="keyword">if</span> (ch == <span class="string">'-'</span>) is_neg = <span class="literal">true</span>, ch = get();</span><br><span class="line">        <span class="keyword">while</span>((ch &gt;=<span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>)) x = x * <span class="number">10</span> + ch  - <span class="string">'0'</span>,ch = get();</span><br><span class="line">       <span class="keyword">if</span> (is_neg) x = -x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(<span class="keyword">float</span> &amp;x)</span> </span>&#123;</span><br><span class="line">       x = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">bool</span> is_neg = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">char</span> ch =get();</span><br><span class="line">       <span class="keyword">float</span> basic = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(!(ch &gt;=<span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>) &amp;&amp; ch != <span class="string">'-'</span>) ch = get();</span><br><span class="line">       <span class="keyword">if</span> (ch == <span class="string">'-'</span>) is_neg = <span class="literal">true</span>, ch = get();</span><br><span class="line">        <span class="keyword">while</span>((ch &gt;=<span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>)) x = x * <span class="number">10</span> + ch  - <span class="string">'0'</span>,ch = get();</span><br><span class="line">       <span class="keyword">if</span> (ch == <span class="string">'.'</span>) &#123;</span><br><span class="line">          ch = get();</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">while</span>((ch &gt;=<span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>)) basic *= <span class="number">0.1</span>, x = x + basic * (ch  - <span class="string">'0'</span>),ch = get();</span><br><span class="line">       <span class="keyword">if</span> (is_neg) x = -x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(x &lt; <span class="number">0</span>)&#123;<span class="built_in">putchar</span>(<span class="string">'-'</span>);x = -x;&#125;</span><br><span class="line">        <span class="keyword">if</span>(x &gt; <span class="number">9</span>)print(x / <span class="number">10</span>);</span><br><span class="line">        <span class="built_in">putchar</span>(x % <span class="number">10</span> + <span class="string">'0'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-<div>
-      
-</div>
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-<div>
-  
-</div>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/28/省选知识点/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zjz">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/87964.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zjz's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/28/省选知识点/" itemprop="url">省选知识点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-28T21:21:38+08:00">
-                2018-11-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="有待补充"><a href="#有待补充" class="headerlink" title="有待补充:"></a>有待补充:</h3><p><img src="https://s1.ax1x.com/2018/04/13/CVEIv8.png" alt=""></p>
-<h1 id="易错总结"><a href="#易错总结" class="headerlink" title="易错总结:"></a>易错总结:</h1><p>1.有时候做题时没有思路时尽量带几个数</p>
-<p>可能就会达到正解</p>
-<p>2.看到最短步数问题一般先想bfs</p>
-<p>再考虑dfs</p>
-<p>3.注意向队列中压元素时q.push((node){s,0});</p>
-<p>中<strong>node一定加括号,否则会无法编译</strong></p>
-<p>4.暴力分一定要写,无论再少也要写</p>
-<p>5.做dp题时一定要看准题面,不要读错题</p>
-<p>6.空间应该在题目范围内开大点,防止RE</p>
-<p>7.做题时应防止负下表出现</p>
-<p>9.在全局变量定义的时候不要再在局部变量中用了<br>防止变量冲突</p>
-<p>10.注意输出时一定不要与之前的已知条件相冲突</p>
-<p>11.取模时能取就取,不要偷懒,好好检查</p>
-<p>12.写最小生成树或二分时一定记得要提前sort</p>
-<p>13.考试时一定要看好数据范围,不要分段打边界判错了</p>
-<p>14.做题时一定要好好读题不要轻信样例</p>
-<h1 id="一些博客"><a href="#一些博客" class="headerlink" title="一些博客:"></a>一些博客:</h1><p>1.<a href="https://blog.csdn.net/qaq__qaq/article/details/53812883" target="_blank" rel="noopener">线性基</a></p>
-<p>2.<a href="http://www.cnblogs.com/flashhu/p/8324551.html" target="_blank" rel="noopener">LCT</a></p>
-<p>3.<a href="https://blog.csdn.net/jarjingx/article/details/8521690" target="_blank" rel="noopener">2-SAT</a></p>
-<p>4.<a href="https://www.cnblogs.com/chinhhh/p/7965433.html" target="_blank" rel="noopener">树链剖分</a></p>
-<p>5.<a href="http://www.cnblogs.com/SYCstudio/p/7260613.html" target="_blank" rel="noopener">Dinic</a></p>
-<p>6.<a href="http://www.cnblogs.com/zwfymqz/p/8244902.html" target="_blank" rel="noopener">FFT</a></p>
-<p>7.<a href="https://www.cnblogs.com/rvalue/p/8678318.html" target="_blank" rel="noopener">模拟退火</a></p>
-<p>8.<a href="https://www.cnblogs.com/peng-ym/p/9158909.html" target="_blank" rel="noopener">模拟退火2</a></p>
-<p>9.<a href="https://www.cnblogs.com/mlystdcall/p/6525962.html" target="_blank" rel="noopener">四边形不等式</a></p>
-<p>10.<a href="https://www.luogu.org/blog/codesonic/Mosalgorithm" target="_blank" rel="noopener">莫队</a></p>
-<p>11.<a href="https://blog.csdn.net/wang3312362136/article/details/79303794" target="_blank" rel="noopener">博弈论(取石子游戏)</a></p>
-<p>12.<a href="https://blog.csdn.net/wu_tongtong/article/details/79362339" target="_blank" rel="noopener">最小圆覆盖</a></p>
-<p>13.<a href="https://www.luogu.org/blog/sincereactor/shu-shang-ci-fen-di-liang-zhong-sai-lu" target="_blank" rel="noopener">树上差分</a></p>
 
           
         
@@ -833,8 +647,8 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  
-                </span>
+                      518 ��
+              </span>
               
 
               
@@ -849,8 +663,8 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  
-                </span>
+                1 ����
+             </span>
               
             </div>
           
@@ -933,6 +747,192 @@
 <p>01背包装不下我的忧伤 </p>
 <p>SPFA告诉我前进的方向</p>
 <p>唯有网络流，告诉我高标推进</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+<div>
+      
+</div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+<div>
+  
+</div>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/28/省选知识点/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zjz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/87964.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zjz's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/28/省选知识点/" itemprop="url">省选知识点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-28T21:21:38+08:00">
+                2018-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                      330 ��
+              </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                1 ����
+             </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="有待补充"><a href="#有待补充" class="headerlink" title="有待补充:"></a>有待补充:</h3><p><img src="https://s1.ax1x.com/2018/04/13/CVEIv8.png" alt=""></p>
+<h1 id="易错总结"><a href="#易错总结" class="headerlink" title="易错总结:"></a>易错总结:</h1><p>1.有时候做题时没有思路时尽量带几个数</p>
+<p>可能就会达到正解</p>
+<p>2.看到最短步数问题一般先想bfs</p>
+<p>再考虑dfs</p>
+<p>3.注意向队列中压元素时q.push((node){s,0});</p>
+<p>中<strong>node一定加括号,否则会无法编译</strong></p>
+<p>4.暴力分一定要写,无论再少也要写</p>
+<p>5.做dp题时一定要看准题面,不要读错题</p>
+<p>6.空间应该在题目范围内开大点,防止RE</p>
+<p>7.做题时应防止负下表出现</p>
+<p>9.在全局变量定义的时候不要再在局部变量中用了<br>防止变量冲突</p>
+<p>10.注意输出时一定不要与之前的已知条件相冲突</p>
+<p>11.取模时能取就取,不要偷懒,好好检查</p>
+<p>12.写最小生成树或二分时一定记得要提前sort</p>
+<p>13.考试时一定要看好数据范围,不要分段打边界判错了</p>
+<p>14.做题时一定要好好读题不要轻信样例</p>
+<h1 id="一些博客"><a href="#一些博客" class="headerlink" title="一些博客:"></a>一些博客:</h1><p>1.<a href="https://blog.csdn.net/qaq__qaq/article/details/53812883" target="_blank" rel="noopener">线性基</a></p>
+<p>2.<a href="http://www.cnblogs.com/flashhu/p/8324551.html" target="_blank" rel="noopener">LCT</a></p>
+<p>3.<a href="https://blog.csdn.net/jarjingx/article/details/8521690" target="_blank" rel="noopener">2-SAT</a></p>
+<p>4.<a href="https://www.cnblogs.com/chinhhh/p/7965433.html" target="_blank" rel="noopener">树链剖分</a></p>
+<p>5.<a href="http://www.cnblogs.com/SYCstudio/p/7260613.html" target="_blank" rel="noopener">Dinic</a></p>
+<p>6.<a href="http://www.cnblogs.com/zwfymqz/p/8244902.html" target="_blank" rel="noopener">FFT</a></p>
+<p>7.<a href="https://www.cnblogs.com/rvalue/p/8678318.html" target="_blank" rel="noopener">模拟退火</a></p>
+<p>8.<a href="https://www.cnblogs.com/peng-ym/p/9158909.html" target="_blank" rel="noopener">模拟退火2</a></p>
+<p>9.<a href="https://www.cnblogs.com/mlystdcall/p/6525962.html" target="_blank" rel="noopener">四边形不等式</a></p>
+<p>10.<a href="https://www.luogu.org/blog/codesonic/Mosalgorithm" target="_blank" rel="noopener">莫队</a></p>
+<p>11.<a href="https://blog.csdn.net/wang3312362136/article/details/79303794" target="_blank" rel="noopener">博弈论(取石子游戏)</a></p>
+<p>12.<a href="https://blog.csdn.net/wu_tongtong/article/details/79362339" target="_blank" rel="noopener">最小圆覆盖</a></p>
+<p>13.<a href="https://www.luogu.org/blog/sincereactor/shu-shang-ci-fen-di-liang-zhong-sai-lu" target="_blank" rel="noopener">树上差分</a></p>
 
           
         
@@ -1102,7 +1102,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count"></span>
+    <span title="Site words total count">1.1k</span>
   
 </div>
 
